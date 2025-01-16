@@ -7,6 +7,8 @@
     "start": "ts-node src/index.ts",
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly src/index.ts",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +24,14 @@
   "homepage": "https://github.com/adbimaditya/gastify#readme",
   "devDependencies": {
     "@types/node": "^22.10.7",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.2",
+    "prettier": "^3.4.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
