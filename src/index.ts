@@ -1,9 +1,9 @@
 import { config } from 'dotenv';
 
 import BrowserManager from './managers/BrowserManager';
-import LoginPage from './pages/LoginPage';
-import Credentials from './types/Credentials';
-import NationalityIDVerificationPage from './pages/NationalityIDVerificationPage';
+import getProduct from './my-pertamina/getProduct';
+import getProfile from './my-pertamina/getProfile';
+import { Credentials } from './types/credentials';
 
 config();
 
@@ -16,13 +16,8 @@ config();
   const browser = new BrowserManager();
   const page = await browser.createPage();
 
-  const loginPage = new LoginPage(page);
-  await loginPage.navigate();
-  await loginPage.login(credentials);
-
-  const nationalityIDVerificationPage = new NationalityIDVerificationPage(page);
-  await nationalityIDVerificationPage.waitForURL();
-  await nationalityIDVerificationPage.closeAnnouncementModal();
+  await getProfile(page, credentials);
+  await getProduct(page, credentials);
 
   await page.close();
   await browser.close();

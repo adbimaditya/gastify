@@ -9,7 +9,7 @@ export default class BrowserManager {
   private browser: Browser | null = null;
   private context: BrowserContext | null = null;
 
-  async createPage(): Promise<Page> {
+  public async createPage(): Promise<Page> {
     if (!this.context) {
       await this.createContext();
     }
@@ -18,7 +18,7 @@ export default class BrowserManager {
     return page;
   }
 
-  async createContext(): Promise<BrowserContext> {
+  public async createContext(): Promise<BrowserContext> {
     if (!this.browser) {
       await this.launch();
     }
@@ -27,7 +27,7 @@ export default class BrowserManager {
     return this.context;
   }
 
-  async launch(): Promise<Browser> {
+  public async launch(): Promise<Browser> {
     if (!this.browser) {
       this.browser = await chromium.launch(browserConfig);
     }
@@ -35,7 +35,7 @@ export default class BrowserManager {
     return this.browser;
   }
 
-  async close(): Promise<void> {
+  public async close(): Promise<void> {
     if (this.context) {
       await this.context.close();
       this.context = null;

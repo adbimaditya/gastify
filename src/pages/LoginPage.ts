@@ -1,7 +1,7 @@
 import { Page } from 'playwright';
 
 import { LOGIN_URL } from '../configs/constants';
-import Credentials from '../types/Credentials';
+import { Credentials } from '../types/credentials';
 
 export default class LoginPage {
   private readonly url: string = LOGIN_URL;

@@ -21,4 +21,12 @@ export default class NationalityIDVerificationPage {
   public async closeAnnouncementModal(): Promise<void> {
     await this.page.locator('[data-testid^="btnClose"]').click();
   }
+
+  public async logout() {
+    await this.page.getByTestId('btnLogout').click();
+    await this.page
+      .getByRole('dialog')
+      .getByRole('button', { name: 'Keluar' })
+      .click();
+  }
 }
