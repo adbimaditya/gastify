@@ -12,7 +12,7 @@ export default class ProductPage {
     this.page = page;
   }
 
-  public async navigate() {
+  public async navigate(): Promise<void> {
     await this.page.goto(this.url);
   }
 

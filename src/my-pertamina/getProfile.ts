@@ -8,8 +8,8 @@ import performAuthenticatedAction from './performAuthenticatedAction';
 
 export default async function getProfile(page: Page, credentials: Credentials) {
   try {
-    const profilePage = new ProfilePage(page);
     await performAuthenticatedAction(page, credentials, async () => {
+      const profilePage = new ProfilePage(page);
       await profilePage.navigate();
       const profile = await profilePage.fetch();
 
