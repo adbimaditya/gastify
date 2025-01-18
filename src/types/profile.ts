@@ -1,6 +1,6 @@
 export type ProfileRecord = {
-  registrationId: string;
-  nationalityId: string;
+  registrationID: string;
+  nationalityID: string;
   name: string;
   phoneNumber: string;
   email: string;

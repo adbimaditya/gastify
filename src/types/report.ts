@@ -15,7 +15,7 @@ export type ReportSummary = {
 export type Transaction = {
   id: string;
   customer: {
-    nationalityId: string;
+    nationalityID: string;
     name: string;
     types: CustomerType[];
   };

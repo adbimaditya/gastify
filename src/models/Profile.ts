@@ -6,8 +6,8 @@ import {
 } from '../types/profile';
 
 export default class Profile {
-  private readonly registrationId: string;
-  private readonly nationalityId: string;
+  private readonly registrationID: string;
+  private readonly nationalityID: string;
   private readonly name: string;
   private readonly phoneNumber: string;
   private readonly email: string;
@@ -16,8 +16,8 @@ export default class Profile {
   private readonly flags: ProfileFlags;
 
   constructor({
-    registrationId,
-    nationalityId,
+    registrationID,
+    nationalityID,
     name,
     phoneNumber,
     email,
@@ -25,8 +25,8 @@ export default class Profile {
     agent,
     flags,
   }: ProfileRecord) {
-    this.registrationId = registrationId;
-    this.nationalityId = nationalityId;
+    this.registrationID = registrationID;
+    this.nationalityID = nationalityID;
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.email = email;
@@ -37,8 +37,8 @@ export default class Profile {
 
   public toJSON(): Readonly<ProfileRecord> {
     return {
-      registrationId: this.registrationId,
-      nationalityId: this.nationalityId,
+      registrationID: this.registrationID,
+      nationalityID: this.nationalityID,
       name: this.name,
       phoneNumber: this.phoneNumber,
       email: this.email,

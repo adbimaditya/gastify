@@ -9,21 +9,20 @@ export default async function performAuthenticatedAction(
   credentials: Credentials,
   action: () => Promise<void>
 ) {
+  const loginPage = new LoginPage(page);
+  const nationalityIDVerificationPage = new NationalityIDVerificationPage(page);
+
   try {
-    const loginPage = new LoginPage(page);
     await loginPage.navigate();
     await loginPage.login(credentials);
 
-    const nationalityIdVerificationPage = new NationalityIDVerificationPage(
-      page
-    );
-    await nationalityIdVerificationPage.waitForURL();
-    await nationalityIdVerificationPage.closeAnnouncementModal();
+    await nationalityIDVerificationPage.waitForURL();
+    await nationalityIDVerificationPage.closeAnnouncementModal();
 
     await action();
 
-    await nationalityIdVerificationPage.navigate();
-    await nationalityIdVerificationPage.logout();
+    await nationalityIDVerificationPage.navigate();
+    await nationalityIDVerificationPage.logout();
   } catch (error) {
     if (error instanceof Error) {
       console.error('Error during authenticated action:', error.message);

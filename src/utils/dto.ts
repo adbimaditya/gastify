@@ -1,9 +1,11 @@
 import { Response } from 'playwright';
 
+import { MAPPING_CUSTOMER_TYPE_TO_QUOTA } from '../configs/constants';
 import ProductResponse from '../responses/ProductResponse';
 import ProfileResponse from '../responses/ProfileResponse';
 import ReportResponse from '../responses/ReportResponse';
-import { CustomerType } from '../types/customer';
+import VerifyNationalityIDResponse from '../responses/VerifyNationalityIDResponse';
+import { CustomerRecord, CustomerType } from '../types/customer';
 import { ProductRecord } from '../types/product';
 import { ProfileRecord } from '../types/profile';
 import { ReportRecord } from '../types/report';
@@ -14,8 +16,8 @@ export async function parseResponseToProfileRecord(
   const { data } = (await response.json()) as ProfileResponse;
 
   return {
-    registrationId: data.registrationId,
-    nationalityId: data.nationalityId,
+    registrationID: data.registrationId,
+    nationalityID: data.nationalityId,
     name: data.name,
     phoneNumber: data.phoneNumber,
     email: data.email,
@@ -75,7 +77,7 @@ export async function parseResponseToReportRecord(
     transactions: data.customersReport.map((customerReport) => ({
       id: customerReport.customerReportId,
       customer: {
-        nationalityId: customerReport.nationalityId,
+        nationalityID: customerReport.nationalityId,
         name: customerReport.name,
         types: customerReport.categories as CustomerType[],
       },
@@ -83,5 +85,33 @@ export async function parseResponseToReportRecord(
         quantity: customerReport.total,
       },
     })),
+  };
+}
+
+export async function parseResponseToCustomerRecord(
+  response: Response,
+  nationalityID: string
+): Promise<CustomerRecord> {
+  const { data } = (await response.json()) as VerifyNationalityIDResponse;
+
+  return {
+    nationalityID,
+    name: data.name,
+    quotas: data.customerTypes.map((customerType) => {
+      const type = customerType.name as CustomerType;
+
+      return {
+        type,
+        quantity: data.quotaRemaining[MAPPING_CUSTOMER_TYPE_TO_QUOTA[type]],
+      };
+    }),
+    flags: {
+      isAgreedTermsConditions: data.isAgreedTermsConditions,
+      isCompleted: data.isCompleted,
+      isSubsidy: data.isSubsidi,
+      isRecommendationLetter: data.isRecommendationLetter,
+      isBlocked: data.isBlocked,
+      isBusinessType: data.isBusinessType,
+    },
   };
 }
