@@ -11,6 +11,7 @@ export const PRODUCT_ENDPOINT = `${BASE_ENDPOINT}/general/v2/products`;
 export const REPORT_ENDPOINT = `${BASE_ENDPOINT}/general/v1/transactions/report`;
 export const NATIONALITY_ID_VERIFICATION_ENDPOINT = `${BASE_ENDPOINT}/customers/v1/verify-nik`;
 
+export const VERIFY_NATIONALITY_ID_DELAY = 6_000;
 export const VERIFY_NATIONALITY_ID_REQUEST_TIMEOUT = 60_000;
 export const CUSTOMER_TYPES = {
   HOUSEHOLD: 'Rumah Tangga',
