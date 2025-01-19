@@ -2,7 +2,7 @@ import { Page } from 'playwright';
 
 import ProfilePage from '../pages/ProfilePage';
 import { Credentials } from '../types/credentials';
-import writeJSONFile from '../utils/file';
+import { writeJSONFile } from '../utils/file';
 
 import performAuthenticatedAction from './performAuthenticatedAction';
 

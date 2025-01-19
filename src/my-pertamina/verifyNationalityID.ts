@@ -2,8 +2,9 @@ import { Page } from 'playwright';
 
 import NationalityIDVerificationPage from '../pages/NationalityIDVerificationPage';
 import { Credentials } from '../types/credentials';
-import writeJSONFile from '../utils/file';
+import { writeJSONFile } from '../utils/file';
 
+import { NATIONALITY_ID_VERIFICATION_URL } from '../configs/constants';
 import performAuthenticatedAction from './performAuthenticatedAction';
 
 export default async function verifyNationalityID(
@@ -19,7 +20,12 @@ export default async function verifyNationalityID(
     try {
       const customer =
         await nationalityIDVerificationPage.verify(nationalityID);
-      await nationalityIDVerificationPage.closeModals(customer);
+
+      if (customer.hasOnlyHouseholdType()) {
+        page.goto(NATIONALITY_ID_VERIFICATION_URL);
+      } else {
+        await nationalityIDVerificationPage.closeModals(customer);
+      }
 
       writeJSONFile(customer.toJSON(), `customer-${nationalityID}.json`);
     } catch (error) {

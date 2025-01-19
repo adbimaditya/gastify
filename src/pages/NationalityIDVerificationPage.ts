@@ -94,7 +94,10 @@ export default class NationalityIDVerificationPage {
   public async closeModals(customer: Customer): Promise<void> {
     if (customer.hasOutdatedRecommendationLetter()) {
       await this.closeUpdateCustomerModal();
-    } else if (customer.isMultipleTypes()) {
+      return;
+    }
+
+    if (customer.isMultipleTypes()) {
       await this.closeChooseCustomerTypeModal();
     }
   }

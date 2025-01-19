@@ -18,11 +18,18 @@ export default class Customer {
     this.flags = flags;
   }
 
-  public hasOutdatedRecommendationLetter(): boolean {
-    return this.isMicroBusiness() && !this.flags.isRecommendationLetter;
+  public hasOnlyHouseholdType(): boolean {
+    return (
+      this.quotas.length === 1 &&
+      this.quotas[0].type === CUSTOMER_TYPES.HOUSEHOLD
+    );
   }
 
-  private isMicroBusiness(): boolean {
+  public hasOutdatedRecommendationLetter(): boolean {
+    return this.hasMicroBusinessType() && !this.flags.isRecommendationLetter;
+  }
+
+  private hasMicroBusinessType(): boolean {
     return Boolean(
       this.quotas.find((quota) => quota.type === CUSTOMER_TYPES.MICRO_BUSINESS)
     );

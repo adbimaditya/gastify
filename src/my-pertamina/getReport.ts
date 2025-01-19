@@ -3,7 +3,7 @@ import { Page } from 'playwright';
 import ReportPage from '../pages/ReportPage';
 import { Credentials } from '../types/credentials';
 import { Dates } from '../types/dates';
-import writeJSONFile from '../utils/file';
+import { writeJSONFile } from '../utils/file';
 
 import performAuthenticatedAction from './performAuthenticatedAction';
 
